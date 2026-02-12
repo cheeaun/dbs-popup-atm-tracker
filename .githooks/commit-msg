@@ -1,0 +1,10 @@
+#!/bin/sh
+
+TRAILER='Co-authored-by: Codex <codex@noreply.local>'
+
+# Only add trailer for commits created from Codex environments.
+[ "${CODEX_SHELL:-}" = "1" ] || exit 0
+
+if ! grep -Fqi "$TRAILER" "$1"; then
+  git interpret-trailers --in-place --trailer "$TRAILER" "$1"
+fi
