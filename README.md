@@ -20,7 +20,7 @@ Tracks crowd data for DBS pop-up ATM locations in Singapore during the 2026 Luna
 
 <!-- CHARTS:START -->
 ### 2026-02-12 (latest)
-- Snapshots: 40
+- Snapshots: 43
 ![DBS pop-up ATM crowd chart for 2026-02-12](charts/20260212.svg)
 
 <details>
