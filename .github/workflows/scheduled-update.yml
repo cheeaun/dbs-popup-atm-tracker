@@ -1,0 +1,50 @@
+name: Update DBS Pop-up ATM Data
+
+on:
+  schedule:
+    # 3-15 Feb 2026, 10:00-21:59 SGT (UTC+8) => 02:00-13:59 UTC
+    - cron: "*/5 2-13 3-15 2 *"
+    # 16 Feb 2026, 10:00-12:59 SGT (UTC+8) => 02:00-04:59 UTC
+    - cron: "*/5 2-4 16 2 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dbs-popup-atm-scheduled-update
+  cancel-in-progress: false
+
+jobs:
+  update-data-and-charts:
+    runs-on: ubuntu-latest
+    env:
+      COLLECT_TZ: Asia/Singapore
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Fetch latest snapshot and refresh chart
+        run: bash ./fetch_csv.sh --once
+
+      - name: Refresh README chart list
+        run: python3 ./generate_readme.py
+
+      - name: Commit and push updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data charts README.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update DBS pop-up ATM data and charts"
+          git push
