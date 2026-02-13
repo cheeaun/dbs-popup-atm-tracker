@@ -16,6 +16,14 @@ Tracks crowd data for DBS pop-up ATM locations in Singapore during the 2026 Luna
 - Schedule and collection window are evaluated in Singapore time (`Asia/Singapore`).
 - Each run saves a new snapshot only when the source CSV changes, then refreshes charts and this README.
 
+### Cloudflare Worker scheduler
+
+```bash
+cd cloudflare-worker && npx wrangler login
+npx wrangler secret put GITHUB_TOKEN
+npx wrangler deploy
+```
+
 ## Daily charts
 
 <!-- CHARTS:START -->

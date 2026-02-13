@@ -1,0 +1,16 @@
+name = "dbs-popup-atm-workflow-dispatcher"
+main = "src/index.js"
+compatibility_date = "2026-02-13"
+
+[triggers]
+crons = [
+  "*/5 2-13 3-15 2 *",
+  "*/5 2-4 16 2 *",
+]
+
+[vars]
+GITHUB_OWNER = "cheeaun"
+GITHUB_REPO = "dbs-popup-atm-tracker"
+GITHUB_WORKFLOW = "scheduled-update.yml"
+GITHUB_REF = "main"
+GITHUB_DISPATCH_MAX_RETRIES = "2"
