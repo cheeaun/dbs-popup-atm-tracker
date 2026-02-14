@@ -28,7 +28,7 @@ npx wrangler deploy
 
 <!-- CHARTS:START -->
 ### 2026-02-14 (latest)
-- Snapshots: 111
+- Snapshots: 112
 ![DBS pop-up ATM crowd chart for 2026-02-14](charts/20260214.svg)
 
 <details>
